@@ -1,16 +1,16 @@
 IMAGE = iskorotkov/rusprofile
 TAG = v0.1.0
 
-.PHONY: build run test build-image push-image run-image protoc-update
+.PHONY: proto-generate build run test build-image push-image run-image
 
-protoc-update:
-	cd pkg && buf generate
+proto-generate:
+	cd ./api && buf generate
 
 build:
 	go build ./...
 
 run:
-	go run ./cmd/rusprofilegrpc
+	go run ./cmd/rusprofile-grpc
 
 test:
 	go test ./...

@@ -1,5 +1,5 @@
 version: v1beta1
-name: buf.build/iskorotkov/rusprofilegrpc
+name: buf.build/DmitriiKumancev/rusprofile-wrapper
 deps:
   - buf.build/beta/googleapis
   - buf.build/grpc-ecosystem/grpc-gateway

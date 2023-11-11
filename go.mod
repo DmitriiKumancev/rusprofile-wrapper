@@ -1,4 +1,4 @@
-module github.com/DmitriiKumancev/rusprofile-wrapper
+module github.com/DmitriiKumancev/rusprofile-grpc
 
 go 1.21.1
 

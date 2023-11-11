@@ -27,7 +27,7 @@ func TestCompanyFinder_ByINN(t *testing.T) {
 				INN:  "5902879646",
 				KPP:  "590201001",
 				Name: "ООО \"Иксолла\"",
-				Ceo:  "Чемоданова Валентина Игоревна",
+				CEO:  "Чемоданова Валентина Игоревна",
 			},
 			wantErr: false,
 		},
