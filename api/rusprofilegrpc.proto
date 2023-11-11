@@ -1,5 +1,4 @@
 syntax = "proto3";
-
 package rusprofile.v1;
 option go_package = "github.com/DmitriiKumancev/rusprofile-grpc/pkg";
 
@@ -21,5 +20,5 @@ message Company {
   string INN = 1;
   string KPP = 2;
   string name = 3;
-  string ceo = 4;
+  string CEO = 4;
 }
