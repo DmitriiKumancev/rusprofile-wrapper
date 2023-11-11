@@ -1,7 +1,7 @@
-IMAGE = iskorotkov/rusprofile
-TAG = v0.1.0
+IMAGE = iskorotkov/rusprofile-grpc
+TAG = v1.0.0
 
-.PHONY: proto-generate build run test build-image push-image run-image
+.PHONY: proto-generate build run test build-image push-image run-image build-push-image
 
 proto-generate:
 	cd ./api && buf generate
@@ -16,10 +16,12 @@ test:
 	go test ./...
 
 build-image:
-	docker build -t $(IMAGE):$(TAG) -f ./build/rusprofilegrpc.dockerfile .
+	docker build -t $(IMAGE):$(TAG) -f ./build/rusprofile-grpc.dockerfile .
 
 push-image:
 	docker push $(IMAGE):$(TAG)
 
 run-image:
-	docker run -it -p 8888:8888 --rm $(IMAGE):$(TAG)
+	docker run -it -p 8080:8080 -p 8888:8888 --rm $(IMAGE):$(TAG)
+
+build-push-image: build-image push-image

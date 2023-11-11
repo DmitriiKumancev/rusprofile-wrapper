@@ -15,5 +15,7 @@ RUN go install -v ./...
 
 # run
 FROM base as run
-COPY --from=builder /go/bin/rusprofilegrpc /app
+COPY --from=builder /go/bin/rusprofile-grpc /app
+COPY --from=builder /go/src/app/api/openapiv2 /api/openapiv2
+COPY --from=builder /go/src/app/static /static
 ENTRYPOINT ["./app"]
