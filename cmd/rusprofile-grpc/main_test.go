@@ -129,7 +129,7 @@ func Test_startHTTPServer(t *testing.T) {
 				inn: &pkg.INN{INN: "123"},
 			},
 			want:     nil,
-			wantCode: 500,
+			wantCode: 404,
 		},
 	}
 	for _, tt := range tests {
