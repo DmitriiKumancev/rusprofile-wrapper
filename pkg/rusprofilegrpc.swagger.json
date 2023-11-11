@@ -1,0 +1,109 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "rusprofilegrpc.proto",
+    "version": "version not set"
+  },
+  "tags": [
+    {
+      "name": "CompanyFinder"
+    }
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/rusprofile.CompanyFinder/ByINN": {
+      "post": {
+        "operationId": "CompanyFinder_ByINN",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/rusprofileCompany"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/rusprofileINN"
+            }
+          }
+        ],
+        "tags": [
+          "CompanyFinder"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "protobufAny": {
+      "type": "object",
+      "properties": {
+        "typeUrl": {
+          "type": "string"
+        },
+        "value": {
+          "type": "string",
+          "format": "byte"
+        }
+      }
+    },
+    "rpcStatus": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/protobufAny"
+          }
+        }
+      }
+    },
+    "rusprofileCompany": {
+      "type": "object",
+      "properties": {
+        "INN": {
+          "type": "string"
+        },
+        "KPP": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "ceo": {
+          "type": "string"
+        }
+      }
+    },
+    "rusprofileINN": {
+      "type": "object",
+      "properties": {
+        "INN": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

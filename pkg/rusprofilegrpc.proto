@@ -1,0 +1,20 @@
+syntax = "proto3";
+
+option go_package = "github.com/DmitriiKumancev/rusprofile-wrapper/pkg";
+
+package rusprofile;
+
+service CompanyFinder {
+    rpc ByINN(INN) returns (Company) {}
+}
+
+message INN {
+    string INN = 1;
+}
+
+message Company {
+    string INN = 1;
+    string KPP = 2;
+    string name = 3;
+    string ceo = 4;
+}
