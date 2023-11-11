@@ -49,6 +49,15 @@ curl localhost:8080/v1/company/123
 curl localhost:8080/v1/company/5003028028
 ```
 
+## Tasks
+
+### Technologies
+- The service is written in Go using Go Modules.
+- Provides API through gRPC.
+- Offers API through HTTP using grpc-gateway.
+- Includes Swagger UI with documentation generated from the .proto file using protoc-gen-swagger. Documentation is accessible at /swaggerui.
+- Packaged in a Docker container.
+
 ## Project Structure
 
 - **api:** Proto files and buf configuration.
@@ -64,6 +73,4 @@ Feel free to explore and contribute to this project!
 #
 **Author:** [Dmitrii Kumancev](https://github.com/DmitriiKumancev)
 
-<p align="center"> 
-  <img src=" https://capsule-render.vercel.app/api?text=Good luck to you🌱 &animation=fadeIn&type=waving&color=gradient&height=100"/> 
-</p>
+
