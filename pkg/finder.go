@@ -17,6 +17,13 @@ const (
 	searchQuery   = "ajax.php?query=%s&action=search"
 )
 
+type company struct {
+	INN  string `json:"inn"`
+	Name string `json:"raw_name"`
+	CEO  string `json:"ceo_name"`
+	URL  string `json:"url"`
+}
+
 type CompanyFinder struct {
 	UnimplementedCompanyFinderServer
 }
@@ -47,24 +54,29 @@ func (c CompanyFinder) ByINN(ctx context.Context, inn *INN) (*Company, error) {
 	}
 
 	var data struct {
-		Items []struct {
-			INN  string `json:"inn"`
-			Name string `json:"raw_name"`
-			CEO  string `json:"ceo_name"`
-			URL  string `json:"url"`
-		} `json:"ul"`
+		Items []company `json:"ul"`
 	}
 
 	if err := json.Unmarshal(b, &data); err != nil {
 		return nil, fmt.Errorf("couldn't unmarshal to json: %w", err)
 	}
 
-	if len(data.Items) == 0 {
+	var comp *company
+	for i := range data.Items {
+		elem := &data.Items[i]
+		elem.INN = strings.Trim(elem.INN, "!~")
+
+		if elem.INN == inn.INN {
+			comp = elem
+			break
+		}
+	}
+
+	if comp == nil {
 		return nil, fmt.Errorf("no company with provided INN")
 	}
 
-	company := data.Items[0]
-	req, err = http.NewRequestWithContext(ctx, "GET", fmt.Sprintf("%s%s", serverAddress, company.URL), nil)
+	req, err = http.NewRequestWithContext(ctx, "GET", fmt.Sprintf("%s%s", serverAddress, comp.URL), nil)
 	if err != nil {
 		return nil, fmt.Errorf("couldn't create request: %w", err)
 	}
@@ -91,13 +103,13 @@ func (c CompanyFinder) ByINN(ctx context.Context, inn *INN) (*Company, error) {
 		return nil, fmt.Errorf("no kpp value was found")
 	}
 
-	kpp := selection.Nodes[0].Data
+	kpp := selection.Nodes[0].FirstChild.Data
 
 	return &Company{
-		INN:  strings.Trim(company.INN, "!~"),
+		INN:  comp.INN,
 		KPP:  kpp,
-		Name: company.Name,
-		Ceo:  company.CEO,
+		Name: comp.Name,
+		Ceo:  comp.CEO,
 	}, nil
 }
 

@@ -17,7 +17,6 @@ import (
 	"github.com/DmitriiKumancev/rusprofile-wrapper/pkg"
 )
 
-// https://www.rusprofile.ru/ajax.php?query=5902879646&action=search
 
 var (
 	grpcPort        = flag.Int("grpc-port", 8888, "port for gRPC server to listen on")
