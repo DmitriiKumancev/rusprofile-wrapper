@@ -16,14 +16,14 @@
     "application/json"
   ],
   "paths": {
-    "/rusprofile.CompanyFinder/ByINN": {
-      "post": {
+    "/v1/company/{INN}": {
+      "get": {
         "operationId": "CompanyFinder_ByINN",
         "responses": {
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/rusprofileCompany"
+              "$ref": "#/definitions/v1Company"
             }
           },
           "default": {
@@ -35,12 +35,10 @@
         },
         "parameters": [
           {
-            "name": "body",
-            "in": "body",
+            "name": "INN",
+            "in": "path",
             "required": true,
-            "schema": {
-              "$ref": "#/definitions/rusprofileINN"
-            }
+            "type": "string"
           }
         ],
         "tags": [
@@ -80,7 +78,7 @@
         }
       }
     },
-    "rusprofileCompany": {
+    "v1Company": {
       "type": "object",
       "properties": {
         "INN": {
@@ -93,14 +91,6 @@
           "type": "string"
         },
         "ceo": {
-          "type": "string"
-        }
-      }
-    },
-    "rusprofileINN": {
-      "type": "object",
-      "properties": {
-        "INN": {
           "type": "string"
         }
       }

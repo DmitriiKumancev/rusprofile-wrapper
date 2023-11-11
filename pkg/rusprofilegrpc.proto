@@ -1,20 +1,25 @@
 syntax = "proto3";
 
+package rusprofile.v1;
 option go_package = "github.com/DmitriiKumancev/rusprofile-wrapper/pkg";
 
-package rusprofile;
+import "google/api/annotations.proto";
 
 service CompanyFinder {
-    rpc ByINN(INN) returns (Company) {}
+  rpc ByINN(INN) returns (Company) {
+    option (google.api.http) = {
+      get: "/v1/company/{INN}"
+    };
+  }
 }
 
 message INN {
-    string INN = 1;
+  string INN = 1;
 }
 
 message Company {
-    string INN = 1;
-    string KPP = 2;
-    string name = 3;
-    string ceo = 4;
+  string INN = 1;
+  string KPP = 2;
+  string name = 3;
+  string ceo = 4;
 }

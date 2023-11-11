@@ -31,7 +31,7 @@ func NewCompanyFinderClient(cc grpc.ClientConnInterface) CompanyFinderClient {
 
 func (c *companyFinderClient) ByINN(ctx context.Context, in *INN, opts ...grpc.CallOption) (*Company, error) {
 	out := new(Company)
-	err := c.cc.Invoke(ctx, "/rusprofile.CompanyFinder/ByINN", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/rusprofile.v1.CompanyFinder/ByINN", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -76,7 +76,7 @@ func _CompanyFinder_ByINN_Handler(srv interface{}, ctx context.Context, dec func
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/rusprofile.CompanyFinder/ByINN",
+		FullMethod: "/rusprofile.v1.CompanyFinder/ByINN",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(CompanyFinderServer).ByINN(ctx, req.(*INN))
@@ -88,7 +88,7 @@ func _CompanyFinder_ByINN_Handler(srv interface{}, ctx context.Context, dec func
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
 var CompanyFinder_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "rusprofile.CompanyFinder",
+	ServiceName: "rusprofile.v1.CompanyFinder",
 	HandlerType: (*CompanyFinderServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{

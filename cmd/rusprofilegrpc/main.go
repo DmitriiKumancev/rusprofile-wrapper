@@ -57,7 +57,7 @@ func main() {
 			log.Fatalf("couldn't register HTTP handler: %v", err)
 		}
 
-		mux.Handle("/api", h)
+		mux.Handle("/", h)
 
 		if err := http.ListenAndServe(fmt.Sprintf(":%d", *httpPort), mux); err != nil {
 			log.Fatalf("HTTP server stopped with error: %v", err)
