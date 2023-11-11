@@ -31,8 +31,12 @@ func main() {
 
 	go func() {
 		mux := http.NewServeMux()
-		mux.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
-			p := path.Join(*staticFilesPath, r.URL.Path)
+		mux.HandleFunc("/swagger/", func(w http.ResponseWriter, r *http.Request) {
+			http.ServeFile(w, r, path.Join(*staticFilesPath, "index.html"))
+		})
+		mux.HandleFunc("/static/", func(w http.ResponseWriter, r *http.Request) {
+			p := strings.TrimPrefix(r.URL.Path, "/static")
+			p = path.Join(*staticFilesPath, p)
 			http.ServeFile(w, r, p)
 		})
 		mux.HandleFunc("/openapiv2/", func(w http.ResponseWriter, r *http.Request) {
